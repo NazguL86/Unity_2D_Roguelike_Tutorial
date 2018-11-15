@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MovingObject
 {
-
+    public AudioClip enemyAttack1;
+    public AudioClip enemyAttack2;
     public int playerDamage;
 
     private Animator animator;
@@ -44,7 +45,8 @@ public class Enemy : MovingObject
 
     protected override void OnCantMove<T>(T component) {
         Player hitPlayer = component as Player;
-        animator.SetTrigger("EnemyAttack");
         hitPlayer.LooseFood(playerDamage);
+        animator.SetTrigger("EnemyAttack");
+        SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
     }
 }
